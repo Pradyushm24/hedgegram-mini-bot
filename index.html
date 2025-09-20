@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Trading Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Telegram Mini App JS API -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background: var(--tg-theme-bg-color, #f2f7ff);
+      padding: 30px;
+      margin: 0;
+    }
+    h2 { color: var(--tg-theme-text-color, #2c3e50); margin-top: 24px; }
+    button {
+      margin: 12px;
+      padding: 15px 35px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.12);
+      transition: background 0.2s, color 0.2s;
+    }
+    .buy { background: var(--tg-theme-button-color, #27ae60); color: var(--tg-theme-button-text-color, #fff); }
+    .sell { background: var(--tg-theme-destructive-bg-color, #e74c3c); color: var(--tg-theme-button-text-color, #fff); }
+  </style>
+</head>
+<body>
+  <h2>📊 Trading Mini App</h2>
+  <button class="buy" onclick="sendData('BUY')">BUY</button>
+  <button class="sell" onclick="sendData('SELL')">SELL</button>
+
+  <script>
+    Telegram.WebApp.ready(); // Notify Telegram the app is ready
+
+    function sendData(action) {
+      Telegram.WebApp.sendData(action);
+    }
+
+    // Optionally, adjust the theme when Telegram's theme changes
+    Telegram.WebApp.onEvent('themeChanged', function() {
+      document.body.style.background = Telegram.WebApp.themeParams.bg_color || "#f2f7ff";
+      document.body.style.color = Telegram.WebApp.themeParams.text_color || "#2c3e50";
+    });
+  </script>
+</body>
+</html>
